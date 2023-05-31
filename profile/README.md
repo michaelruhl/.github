@@ -1,5 +1,22 @@
 # API Documentation
 
+## Sign in
+POST /users/sign_in
+Params = { users: { email: "email", password: "password" } }
+Example of Sign in (JS) using await:
+const params = {}
+...
+...
+Successful Response -> data, status, auth jwt
+Unsuccessful Response -> data, status
+
+## Sign out
+GET /users/sign_out
+Config = ....
+Example of Sign out (JS) using await:
+....
+....
+Response -> 
 <!--
 
 **Here are some ideas to get you started:**
