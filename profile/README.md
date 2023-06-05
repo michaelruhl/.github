@@ -1,22 +1,64 @@
 # API Documentation
+Description of each API endpoint used in this app is listed here.
+The type of resource is listed along with a short description.
+Any params or config objects are shown too along with response schema.
+Examples are also shown in JavaScript.
 
-## Sign in
-POST /users/sign_in
-Params = { users: { email: "email", password: "password" } }
-Example of Sign in (JS) using await:
-const params = {}
-...
-...
-Successful Response -> data, status, auth jwt
-Unsuccessful Response -> data, status
+## Authorization
+### POST `/users/sign_in`
+The sign in is a POST request that takes in a params object.
+When the user is signed in, a JWT is returned.
 
-## Sign out
-GET /users/sign_out
-Config = ....
-Example of Sign out (JS) using await:
-....
-....
-Response -> 
+| Params        | Type           | Description |
+| ------------- |:-------------:| :-------------: |
+| email      | string | User's email (Required) |
+| password      | string      | User's password (Required) |
+
+Example of sign in (JS) using axios:
+```javascript
+const params = {
+      user: {
+        email: "test1@test.com",
+        password: "12345",
+      },
+    };
+const response = await authApi.post('/users/sign_in', params);
+```
+| Successful Response        | Type           | Description |
+| ------------- |:-------------:| :-------------: |
+| data      | JSON | "Successfully authenticated" |
+| status      | integer      | 200 OK |
+| authorization | string | The JWT |
+
+| Unsuccessful Response        | Type           | Description |
+| ------------- |:-------------:| :-------------: |
+| data      | JSON | "Something went wrong with API sign in :(" |
+| status      | integer      | 401 Unauthorized |
+
+
+
+### GET `/users/sign_out`
+The sign out is a GET request that takes in a config object.
+When the user is signed out, the JWT is removed from app state and async storage.
+
+| Config        | Type           | Description |
+| ------------- |:-------------:| :-------------: |
+| Authorization      | string | JWT (Required) |
+
+Example of sign out (JS) using axios:
+```javascript
+const config = {
+  headers: {
+    Authorization: "JWT goes here",
+  },
+};
+const response = await authApi.get('/users/sign_out', config);
+```
+| Successful Response        | Type           | Description |
+| ------------- |:-------------:| :-------------: |
+| data      | JSON | "Successfully Signed Out" |
+| status      | integer      | 200 OK |
+
 <!--
 
 **Here are some ideas to get you started:**
