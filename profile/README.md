@@ -59,6 +59,23 @@ const response = await authApi.get('/users/sign_out', config);
 | data      | JSON | "Successfully Signed Out" |
 | status      | integer      | 200 OK |
 
+## Casa Cases
+### GET `/casa_cases`
+This route fetches (gets) all current casa cases for the signed in user. No params required. The JWT is required for every request.
+
+| Config        | Type           | Description |
+| ------------- |:-------------:| :-------------: |
+| Authorization      | string | JWT (Required) |
+
+Example of fetching casa cases (JS) using axios:
+```javascript
+TBD
+```
+
+| Successful Response        | Type           | Description |
+| ------------- |:-------------:| :-------------: |
+| data      | JSON array of objects | [{...}, {...}, {...}...] |
+| status      | integer      | 200 OK |
 <!--
 
 **Here are some ideas to get you started:**
