@@ -5,7 +5,7 @@ Any params or config objects are shown too along with response schema.
 Examples are also shown in JavaScript.
 
 ## Authorization
-### POST `/users/sign_in`
+### POST `api/v1/users/sign_in`
 The sign in is a POST request that takes in a params object.
 When the user is signed in, a JWT is returned.
 
@@ -22,7 +22,7 @@ const params = {
         password: "12345",
       },
     };
-const response = await authApi.post('/users/sign_in', params);
+const response = await authApi.post('api/v1/users/sign_in', params);
 ```
 | Successful Response        | Type           | Description |
 | ------------- |:-------------:| :-------------: |
@@ -32,12 +32,12 @@ const response = await authApi.post('/users/sign_in', params);
 
 | Unsuccessful Response        | Type           | Description |
 | ------------- |:-------------:| :-------------: |
-| data      | JSON | "Something went wrong with API sign in :(" |
+| data      | JSON | "Wrong password or username" |
 | status      | integer      | 401 Unauthorized |
 
 
 
-### GET `/users/sign_out`
+### GET `api/v1/users/sign_out`
 The sign out is a GET request that takes in a config object.
 When the user is signed out, the JWT is removed from app state and async storage.
 
@@ -52,7 +52,7 @@ const config = {
     Authorization: "JWT goes here",
   },
 };
-const response = await authApi.get('/users/sign_out', config);
+const response = await authApi.get('api/v1/users/sign_out', config);
 ```
 | Successful Response        | Type           | Description |
 | ------------- |:-------------:| :-------------: |
@@ -60,7 +60,7 @@ const response = await authApi.get('/users/sign_out', config);
 | status      | integer      | 200 OK |
 
 ## Casa Cases
-### GET `/casa_cases`
+### GET `api/v1/casa_cases`
 This route fetches (gets) all current casa cases for the signed in user. No params required. The JWT is required for every request.
 
 | Config        | Type           | Description |
@@ -69,7 +69,40 @@ This route fetches (gets) all current casa cases for the signed in user. No para
 
 Example of fetching casa cases (JS) using axios:
 ```javascript
-TBD
+const config = {
+  headers: {
+    Authorization: "JWT goes here",
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  },
+};
+const response = await authApi.get('api/v1/casa_cases', config);
+```
+
+| Successful Response        | Type           | Description |
+| ------------- |:-------------:| :-------------: |
+| data      | JSON array of objects | [{...}, {...}, {...}...] |
+| status      | integer      | 200 OK |
+
+
+## Case Contacts
+### GET `api/v1/casa_contacts`
+This route fetches (gets) all current casa cases for the signed in user. No params required. The JWT is required for every request.
+
+| Config        | Type           | Description |
+| ------------- |:-------------:| :-------------: |
+| Authorization      | string | JWT (Required) |
+
+Example of fetching casa cases (JS) using axios:
+```javascript
+const config = {
+  headers: {
+    Authorization: "JWT goes here",
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  },
+};
+const response = await authApi.get('api/v1/case_contacts', config);
 ```
 
 | Successful Response        | Type           | Description |
